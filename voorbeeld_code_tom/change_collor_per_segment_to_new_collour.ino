@@ -8,7 +8,7 @@ void change_collor_per_segment_to_new_collour(){
 
       // this loop goes through all the rows
 
-        int r_new = new_collour_setting[row_counter_comp][place_red];
+       int r_new = new_collour_setting[row_counter_comp][place_red];
       int g_new = new_collour_setting[row_counter_comp][place_green];
       int b_new = new_collour_setting[row_counter_comp][place_blue];
       int brightness_new = new_collour_setting[row_counter_comp][place_brightnes];

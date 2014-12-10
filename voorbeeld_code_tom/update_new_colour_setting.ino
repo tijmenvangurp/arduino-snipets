@@ -5,10 +5,9 @@ void update_new_colour_setting( int brightness_setting){
   int ammount_of_colors = 0;
   int place_counter_current_colors = 0;
 
-
-
-
   if(brightness_setting != 0){
+    Serial.println("we have a brightness setting to overull the current setting");
+    // we have a brightness setting to overull the current setting
     for(int current_row = 0; current_row < rows ; current_row++){
       if(colors_to_use[current_row]){
         for(int color_settings; color_settings < 3; color_settings++){
@@ -21,6 +20,8 @@ void update_new_colour_setting( int brightness_setting){
     }
   }
   else{
+    Serial.println("use brightness setting of defined collors");
+    // we don't have a brightness setting to overull the current setting
     for(int current_row = 0; current_row < rows ; current_row++){
       if(colors_to_use[current_row]){
         for(int color_settings; color_settings < 4; color_settings++){
@@ -31,11 +32,12 @@ void update_new_colour_setting( int brightness_setting){
       }
     }
   }
+  Serial.print("ammount_of_colors  = ");
+   Serial.println(ammount_of_colors);
 
   if(ammount_of_colors > 1){
     // more than one color
-
-    for(int row_counter = 0 ; row_counter < rows ; row_counter++){
+        for(int row_counter = 0 ; row_counter < rows ; row_counter++){
       // this loop goes through all the rows
 
       if(place_counter_current_colors > ammount_of_colors){
@@ -45,12 +47,12 @@ void update_new_colour_setting( int brightness_setting){
       for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){
         // for every row, this loops through all the collums
         // r g b bright langs
+        Serial.print("rgb brightnes value = ");
+        Serial.println(current_colors[place_counter_current_colors][collor_setting_counter]);
         new_collour_setting[row_counter][collor_setting_counter] = current_colors[place_counter_current_colors][collor_setting_counter];
       }
       place_counter_current_colors++;
     }
-
-
   }
   else if (ammount_of_colors == 1){
     // there was only one color 
@@ -64,15 +66,13 @@ void update_new_colour_setting( int brightness_setting){
         new_collour_setting[row_counter][collor_setting_counter] = current_colors[0][collor_setting_counter];
       }
     }
-
-
-
   }
   else{
     // no colors
     Serial.println("No colors dude!");
     memset(current_collour_setting, 0, sizeof(current_collour_setting[0][0]) * colours_places * rows);
   }
+   memset(colors_to_use, 0, sizeof(colors_to_use));
  
 }
 

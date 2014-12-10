@@ -98,7 +98,6 @@ void loop (){
       // when in other function first fadeout before fading in
       // fadeout function
       // fadein is standaart      
-      memset(colors_to_use, 0, sizeof(colors_to_use));
       colors_to_use[bright_red] = true; 
       colors_to_use[green_brightnes_100] = true; 
       update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors

@@ -42,7 +42,7 @@ void update_new_colour_setting( int brightness_setting){
     for(int row_counter = 0 ; row_counter < rows ; row_counter++){
       // this loop goes through all the rows
 
-      if(place_counter_current_colors < ammount_of_colors){
+      if(place_counter_current_colors > ammount_of_colors -1 ){// als er 2 kleuren zijn mag de counter niet hoger worden dan 1 dus niet groter dan ammount of colors -1 
         place_counter_current_colors = 0; 
       }    
       for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){

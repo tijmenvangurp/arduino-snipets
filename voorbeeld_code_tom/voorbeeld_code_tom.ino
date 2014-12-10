@@ -12,10 +12,9 @@ const byte place_green = 1;
 const byte place_blue = 2;
 const byte place_brightnes = 3;
 
-int current_led_numbers [rows][collums];
-
-int new_collour_setting [rows][colours_places];
-int current_collour_setting [rows][colours_places];
+ byte current_led_numbers [rows][collums];
+ byte new_collour_setting [rows][colours_places];
+byte current_collour_setting [rows][colours_places];
 
 
 int row_counter_comp = 0;
@@ -29,20 +28,20 @@ int ammount_of_colours_in_coulors_counter = 0;
 unsigned long time_stamp = 0;
 
 
-int colours[ammount_of_colours_in_coulors][colours_places] = {
+byte colours[ammount_of_colours_in_coulors][colours_places] = {
   {
-    255,0,0,100                                                                                }
+    255,0,0,100                                                                                  }
   ,{
-    255,255,255,100                                                                                }
+    255,255,255,100                                                                                  }
   ,{
-    0,0,255,100                                                                                }
+    0,0,255,100                                                                                  }
   ,{
-    0,255,0,100                                                                                }
+    0,255,0,100                                                                                  }
 };
 
 boolean colors_to_use [ammount_of_colours_in_coulors];
 const byte bright_red = 0;
-const byte green_brightnes_100 = 3;
+const byte green_brightnes = 3;
 
 char state_char = 'S';
 
@@ -54,7 +53,7 @@ void setup(){
    memset(array, 0, sizeof(array[0][0]) * m * n);
    Where m and n are the width and height of the two-dimensional array (in your example, you have a square two-dimensional array, so m == n).
    */
-  memset(current_collour_setting, 0, sizeof(current_collour_setting[0][0]) * colours_places * rows);
+  memset(current_collour_setting, 0, sizeof(current_collour_setting[0][0]) * rows * colours_places );
   memset(new_collour_setting, 0, sizeof(new_collour_setting[0][0]) * rows * collums);
 
 
@@ -68,6 +67,7 @@ void setup(){
     }
   }
   strip.begin();
+  Serial.println("Restart");
   // strip.show();
 }
 
@@ -83,12 +83,16 @@ void loop (){
       // fadeout function
       // fadein is standaart      
       colors_to_use[bright_red] = true; 
-      colors_to_use[green_brightnes_100] = true; 
+      colors_to_use[green_brightnes] = true; 
       update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
       updating_leds_per_segment_after_comparing = true;
       // updating__all_leds_after_comparing = true; 
       break;
     case 'C':
+      colors_to_use[bright_red] = true; 
+      colors_to_use[1] = true; 
+      update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
+      updating__all_leds_after_comparing = true;
       break;
     case 'O':
       // alles blinken groen
@@ -109,6 +113,7 @@ void loop (){
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
 }
+
 
 
 

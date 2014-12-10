@@ -46,7 +46,7 @@ void change_collor_per_segment_to_new_collour(){
   else{
     // reset function
     row_counter_comp = 0; 
-    updating_leds_after_comparing = false;
+    updating_leds_per_segment_after_comparing = false;
   }
 }
 

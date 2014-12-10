@@ -20,7 +20,7 @@ int current_collour_setting [rows][colours_places];
 
 int row_counter_comp = 0;
 boolean updating_leds_per_segment_after_comparing = false; 
-updating__all_leds_after_comparing = false;
+boolean updating__all_leds_after_comparing = false;
 int brightness_counter = 0;
 
 const byte ammount_of_colours_in_coulors = 4;
@@ -97,8 +97,8 @@ void loop (){
     case 'A':
       // when in other function first fadeout before fading in
       // fadeout function
-      // fadein is standaart
-      // TODO: all colors to use to false
+      // fadein is standaart      
+      memset(colors_to_use, 0, sizeof(colors_to_use));
       colors_to_use[bright_red] = true; 
       colors_to_use[green_brightnes_100] = true; 
       update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors

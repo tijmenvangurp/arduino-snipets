@@ -31,7 +31,6 @@ void change_collor_per_segment_to_new_collour(){
         // for every row, this loops through all the collums
         setPixelColor(current_led_numbers[row_counter_comp][collum_counter], r_current, g_current, b_current, brightness_current);
       }      
-
       strip.show();
       if(r_new == r_current && g_new == g_current && b_new == b_current && brightness_current == brightness_new){
         // done with changing colours update the next compartment
@@ -49,10 +48,10 @@ void change_collor_per_segment_to_new_collour(){
 
 
 void compare_old_and_new_coulour_setting (int current_coulour, int new_collour, int current_color_place){
-  Serial.print("old color value = ");
-  Serial.print(current_coulour);
-  Serial.print(" new color value = ");
-  Serial.println(new_collour);
+  
+  if(current_coulour > 255 || current_coulour < 0 || new_collour > 255 || new_collour < 0 ){
+  Serial.println("Something went wrong in comparing values");  
+  }
 
   if(current_coulour > new_collour){
     // current_coulour must become biger

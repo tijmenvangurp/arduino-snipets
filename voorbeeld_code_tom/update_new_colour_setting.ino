@@ -42,14 +42,14 @@ void update_new_colour_setting( int brightness_setting){
     for(int row_counter = 0 ; row_counter < rows ; row_counter++){
       // this loop goes through all the rows
 
-      if(place_counter_current_colors >= ammount_of_colors){
+      if(place_counter_current_colors < ammount_of_colors){
         place_counter_current_colors = 0; 
       }    
       for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){
         // for every row, this loops through all the collums
         // r g b bright langs
-        Serial.print("rgb brightnes value = ");
-        Serial.println(current_colors[place_counter_current_colors][collor_setting_counter]);
+//        Serial.print("rgb brightnes value = ");
+//        Serial.println(current_colors[place_counter_current_colors][collor_setting_counter]);
         new_collour_setting[row_counter][collor_setting_counter] = current_colors[place_counter_current_colors][collor_setting_counter];
       }
       place_counter_current_colors++;
@@ -58,10 +58,8 @@ void update_new_colour_setting( int brightness_setting){
   else if (ammount_of_colors == 1){
     // there was only one color 
     Serial.println("There was only one color");
-
     for(int row_counter = 0 ; row_counter < rows ; row_counter++){
       // this loop goes through all the rows
-
       for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){
         // for every row, this loops through all the collums
         // r g b bright langs

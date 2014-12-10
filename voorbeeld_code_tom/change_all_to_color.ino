@@ -1,8 +1,8 @@
 void change_all_to_color(){
 
-  int time_passed = micros() - timestamp_function_one;
+  int time_passed = micros() - time_stamp;
   if(time_passed > 5000){
-    timestamp_function_one = micros();
+    time_stamp = micros();
 
     // this loop goes through all the rows
     for(int row_counter = 0 ; row_counter < rows ; row_counter++){

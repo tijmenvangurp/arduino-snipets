@@ -2,10 +2,9 @@ void change_collor_per_segment_to_new_collour(){
 
   if(row_counter_comp < rows ){
 
-    int time_passed = micros() - timestamp_function_one;
+    int time_passed = micros() - time_stamp;
     if(time_passed > 5000){
-      timestamp_function_one = micros();
-
+      time_stamp = micros();
       // this loop goes through all the rows
 
        int r_new = new_collour_setting[row_counter_comp][place_red];
@@ -28,7 +27,6 @@ void change_collor_per_segment_to_new_collour(){
       // for example if the current Red value in the all composition array is smaller than the new vallue, we must increase R untill it is the same as the new vallue
       // same counts for G B and Brightness
       // But when the old value of R is bigger than the new value we must decrease its value untill it is the same as the new vallue
-
 
       for(int collum_counter = 0; collum_counter < collums ; collum_counter++){
         // for every row, this loops through all the collums
@@ -55,11 +53,11 @@ void compare_old_and_new_coulour_setting (int current_coulour, int new_collour, 
 
   if(current_coulour > new_collour){
     // current_coulour must become biger
-    current_collour_setting[row_counter_comp][current_color_place] ++;
+    current_collour_setting[row_counter_comp][current_color_place] = current_collour_setting[row_counter_comp][current_color_place] + 1 ;
   }
   else if(new_collour < current_coulour){
     // current_coulour must become smaller
-    current_collour_setting[row_counter_comp][current_color_place] --;
+    current_collour_setting[row_counter_comp][current_color_place]  = current_collour_setting[row_counter_comp][current_color_place] - 1;
   }
 
 }

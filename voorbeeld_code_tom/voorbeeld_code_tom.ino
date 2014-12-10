@@ -26,17 +26,18 @@ int brightness_counter = 0;
 const byte ammount_of_colours_in_coulors = 4;
 int ammount_of_colours_in_coulors_counter = 0;
 
-unsigned long timestamp_function_one = 0;
+unsigned long time_stamp = 0;
+
 
 int colours[ammount_of_colours_in_coulors][colours_places] = {
   {
-    255,0,0,100                                                                        }
+    255,0,0,100                                                                          }
   ,{
-    255,255,255,100                                                                        }
+    255,255,255,100                                                                          }
   ,{
-    0,0,255,100                                                                        }
+    0,0,255,100                                                                          }
   ,{
-    0,255,0,100                                                                        }
+    0,255,0,100                                                                          }
 };
 
 boolean colors_to_use [ammount_of_colours_in_coulors];
@@ -95,6 +96,7 @@ void loop (){
     // Serial.read() gets the byte into the charecter
     switch (state_char){
     case 'A':
+      Serial.println("A key was pressed: ");
       // when in other function first fadeout before fading in
       // fadeout function
       // fadein is standaart      
@@ -117,15 +119,15 @@ void loop (){
 
   if(updating_leds_per_segment_after_comparing){
     change_collor_per_segment_to_new_collour();
-  }
-   if(updating__all_leds_after_comparing){
-    change_collor_per_segment_to_new_collour();
+  }else if(updating__all_leds_after_comparing){
+    change_all_to_color();
   }
 }
 
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
 }
+
 
 
 

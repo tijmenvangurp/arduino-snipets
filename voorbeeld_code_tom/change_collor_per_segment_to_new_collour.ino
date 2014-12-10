@@ -29,6 +29,7 @@ void change_collor_per_segment_to_new_collour(){
 
       for(int collum_counter = 0; collum_counter < collums ; collum_counter++){
         // for every row, this loops through all the collums
+        
         setPixelColor(current_led_numbers[row_counter_comp][collum_counter], r_current, g_current, b_current, brightness_current);
       }      
       strip.show();
@@ -41,6 +42,7 @@ void change_collor_per_segment_to_new_collour(){
   }
   else{
     // reset function
+    Serial.println("finished setting new color");
     row_counter_comp = 0; 
     updating_leds_per_segment_after_comparing = false;
   }

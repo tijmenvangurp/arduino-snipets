@@ -31,13 +31,13 @@ unsigned long time_stamp = 0;
 
 int colours[ammount_of_colours_in_coulors][colours_places] = {
   {
-    255,0,0,100                                                                              }
+    255,0,0,100                                                                                }
   ,{
-    255,255,255,100                                                                              }
+    255,255,255,100                                                                                }
   ,{
-    0,0,255,100                                                                              }
+    0,0,255,100                                                                                }
   ,{
-    0,255,0,100                                                                              }
+    0,255,0,100                                                                                }
 };
 
 boolean colors_to_use [ammount_of_colours_in_coulors];
@@ -47,7 +47,7 @@ const byte green_brightnes_100 = 3;
 char state_char = 'S';
 
 void setup(){
-    Serial.begin(9600);
+  Serial.begin(9600);
   memset(colors_to_use, 0, sizeof(colors_to_use));
   /*
   http://stackoverflow.com/questions/2516096/fastest-way-to-zero-out-a-2d-array-in-c
@@ -55,6 +55,8 @@ void setup(){
    Where m and n are the width and height of the two-dimensional array (in your example, you have a square two-dimensional array, so m == n).
    */
   memset(current_collour_setting, 0, sizeof(current_collour_setting[0][0]) * colours_places * rows);
+  memset(new_collour_setting, 0, sizeof(new_collour_setting[0][0]) * rows * collums);
+
 
 
   // array to fill current led numbers with appropriate led number per row
@@ -107,6 +109,7 @@ void loop (){
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
 }
+
 
 
 

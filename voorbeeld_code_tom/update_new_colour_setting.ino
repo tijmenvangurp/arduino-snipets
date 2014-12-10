@@ -14,11 +14,7 @@ void update_new_colour_setting( int brightness_setting){
       if(colors_to_use[current_row] == true){
         for(int color_settings = 0; color_settings < 4; color_settings++){
           // fill new array with only the colors we want to use
-          int predefined_colour = colours[current_row][color_settings];
-          if(predefined_colour > 255 || predefined_colour < 0){
-          Serial.println(" the predefined color has changed EROR");
-          }
-          current_colors[ammount_of_colors][color_settings] = colours[current_row][color_settings];
+         current_colors[ammount_of_colors][color_settings] = colours[current_row][color_settings];
         }
         ammount_of_colors++;
       }
@@ -51,7 +47,7 @@ void update_new_colour_setting( int brightness_setting){
       if(place_counter_current_colors > ammount_of_colors -1 ){// als er 2 kleuren zijn mag de counter niet hoger worden dan 1 dus niet groter dan ammount of colors -1 
         place_counter_current_colors = 0; 
       }
-      
+
       Serial.print("new colour is ");  
 
       for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){
@@ -62,12 +58,12 @@ void update_new_colour_setting( int brightness_setting){
         //        Serial.print("rgb brightnes value = ");
         //        Serial.println(current_colors[place_counter_current_colors][collor_setting_counter]);
         new_collour_setting[row_counter][collor_setting_counter] = current_colors[place_counter_current_colors][collor_setting_counter];
-        
+
       }
       Serial.println(" "); 
       place_counter_current_colors++;
     }
-     Serial.println(" "); 
+    Serial.println(" "); 
     Serial.println("Finished setting collor settings");
   }
   else if (ammount_of_colors == 1){
@@ -87,9 +83,12 @@ void update_new_colour_setting( int brightness_setting){
     Serial.println("No colors dude!");
     memset(current_collour_setting, 0, sizeof(current_collour_setting[0][0]) * colours_places * rows);
   }
-  memset(colors_to_use, 0, sizeof(colors_to_use));
+  for(int i = 0; i < ammount_of_colours_in_coulors ; i++){
+    colors_to_use[i] = false;
+  }
 
 }
+
 
 
 

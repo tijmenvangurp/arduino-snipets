@@ -47,7 +47,10 @@ char state_char = 'S';
 
 void setup(){
   Serial.begin(9600);
-  memset(colors_to_use, 0, sizeof(colors_to_use));
+  for(int i = 0; i < ammount_of_colours_in_coulors ; i++){
+  colors_to_use[i] = false;
+  }
+  
   /*
   http://stackoverflow.com/questions/2516096/fastest-way-to-zero-out-a-2d-array-in-c
    memset(array, 0, sizeof(array[0][0]) * m * n);
@@ -84,6 +87,7 @@ void loop (){
       // fadein is standaart      
       colors_to_use[bright_red] = true; 
       colors_to_use[green_brightnes] = true; 
+      colors_to_use[3] = true; 
       update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
       updating_leds_per_segment_after_comparing = true;
       // updating__all_leds_after_comparing = true; 

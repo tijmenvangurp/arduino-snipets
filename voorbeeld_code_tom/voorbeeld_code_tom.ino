@@ -20,7 +20,6 @@ int ammount_of_colours_in_coulors_counter = 0;
 
 unsigned long timestamp_function_one = 0;
 
-
 int colours[ammount_of_colours_in_coulors][colours_places] = {
   {
     255,0,0,100                                                    }
@@ -29,12 +28,6 @@ int colours[ammount_of_colours_in_coulors][colours_places] = {
   ,{
     0,0,255,100                                                    }
 };
-
-
-
-
-
-
 
 char state_char = 'B';
 
@@ -59,10 +52,6 @@ void setup(){
     }
     ammount_of_colours_in_coulors_counter++;
   }
-
-
-
-
   strip.begin();
   // strip.show();
   Serial.begin(9600);
@@ -134,11 +123,8 @@ void function_1(){
     //    Serial.print("The time pased = ");
     //    Serial.print(time_passed):
     //    Serial.println(" milliseconds");
-
-
   }
 }
-
 
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));

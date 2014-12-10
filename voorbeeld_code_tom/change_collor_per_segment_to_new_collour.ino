@@ -3,7 +3,7 @@ void change_collor_per_segment_to_new_collour(){
   if(row_counter_comp < rows ){
 
     int time_passed = micros() - time_stamp;
-    if(time_passed > 5000){
+    if(time_passed > 100){
       time_stamp = micros();
       // this loop goes through all the rows
       int r_new = new_collour_setting[row_counter_comp][place_red];
@@ -29,12 +29,22 @@ void change_collor_per_segment_to_new_collour(){
 
       for(int collum_counter = 0; collum_counter < collums ; collum_counter++){
         // for every row, this loops through all the collums
-        
+
         setPixelColor(current_led_numbers[row_counter_comp][collum_counter], r_current, g_current, b_current, brightness_current);
       }      
       strip.show();
       if(r_new == r_current && g_new == g_current && b_new == b_current && brightness_current == brightness_new){
         // done with changing colours update the next compartment
+        Serial.print("current row = ");
+        Serial.print(row_counter_comp);
+        Serial.print(" r= ");
+        Serial.print(r_current);
+        Serial.print(" g= ");
+        Serial.print(g_current);
+        Serial.print(" b= ");
+        Serial.print(b_current);
+        Serial.print(" br= ");
+        Serial.println(brightness_current);
         row_counter_comp++;
       }
     }
@@ -43,6 +53,7 @@ void change_collor_per_segment_to_new_collour(){
   else{
     // reset function
     Serial.println("finished setting new color");
+
     row_counter_comp = 0; 
     updating_leds_per_segment_after_comparing = false;
   }
@@ -50,9 +61,9 @@ void change_collor_per_segment_to_new_collour(){
 
 
 void compare_old_and_new_coulour_setting (int current_coulour, int new_collour, int current_color_place){
-  
+
   if(current_coulour > 255 || current_coulour < 0 || new_collour > 255 || new_collour < 0 ){
-  Serial.println("Something went wrong in comparing values");  
+    Serial.println("Something went wrong in comparing values");  
   }
 
   if(current_coulour > new_collour){
@@ -65,4 +76,6 @@ void compare_old_and_new_coulour_setting (int current_coulour, int new_collour, 
   }
 
 }
+
+
 

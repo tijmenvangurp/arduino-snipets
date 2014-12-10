@@ -32,9 +32,7 @@ void change_all_to_color(){
       for(int collum_counter = 0; collum_counter < collums ; collum_counter++){
         // for every row, this loops through all the collums
         setPixelColor(current_led_numbers[row_counter][collum_counter], r_current, g_current, b_current, brightness_current);
-      }      
-
-      
+      }        
       if(r_new == r_current && g_new == g_current && b_new == b_current && brightness_current == brightness_new){
         // done with changing colours update the next compartment
         

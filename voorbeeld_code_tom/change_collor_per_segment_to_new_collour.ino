@@ -6,8 +6,7 @@ void change_collor_per_segment_to_new_collour(){
     if(time_passed > 5000){
       time_stamp = micros();
       // this loop goes through all the rows
-
-       int r_new = new_collour_setting[row_counter_comp][place_red];
+      int r_new = new_collour_setting[row_counter_comp][place_red];
       int g_new = new_collour_setting[row_counter_comp][place_green];
       int b_new = new_collour_setting[row_counter_comp][place_blue];
       int brightness_new = new_collour_setting[row_counter_comp][place_brightnes];
@@ -50,14 +49,19 @@ void change_collor_per_segment_to_new_collour(){
 
 
 void compare_old_and_new_coulour_setting (int current_coulour, int new_collour, int current_color_place){
+  Serial.print("old color value = ");
+  Serial.print(current_coulour);
+  Serial.print(" new color value = ");
+  Serial.println(new_collour);
 
   if(current_coulour > new_collour){
     // current_coulour must become biger
-    current_collour_setting[row_counter_comp][current_color_place] = current_collour_setting[row_counter_comp][current_color_place] + 1 ;
+    current_collour_setting[row_counter_comp][current_color_place] = current_collour_setting[row_counter_comp][current_color_place] - 1 ;
   }
-  else if(new_collour < current_coulour){
+  else if(current_coulour < new_collour){
     // current_coulour must become smaller
-    current_collour_setting[row_counter_comp][current_color_place]  = current_collour_setting[row_counter_comp][current_color_place] - 1;
+    current_collour_setting[row_counter_comp][current_color_place]  = current_collour_setting[row_counter_comp][current_color_place] + 1;
   }
 
 }
+

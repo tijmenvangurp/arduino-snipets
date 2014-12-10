@@ -31,26 +31,24 @@ unsigned long time_stamp = 0;
 
 int colours[ammount_of_colours_in_coulors][colours_places] = {
   {
-    255,0,0,100                                                                          }
+    255,0,0,100                                                                              }
   ,{
-    255,255,255,100                                                                          }
+    255,255,255,100                                                                              }
   ,{
-    0,0,255,100                                                                          }
+    0,0,255,100                                                                              }
   ,{
-    0,255,0,100                                                                          }
+    0,255,0,100                                                                              }
 };
 
 boolean colors_to_use [ammount_of_colours_in_coulors];
 const byte bright_red = 0;
 const byte green_brightnes_100 = 3;
 
-
-
-
-
 char state_char = 'S';
 
 void setup(){
+    Serial.begin(9600);
+  memset(colors_to_use, 0, sizeof(colors_to_use));
   /*
   http://stackoverflow.com/questions/2516096/fastest-way-to-zero-out-a-2d-array-in-c
    memset(array, 0, sizeof(array[0][0]) * m * n);
@@ -67,29 +65,11 @@ void setup(){
       current_led_numbers[row_counter][collum_counter]= (row_counter*collums)+collum_counter;
     }
   }
-
-  // get a collour from the coulors array and fill the current collour setting with these colours
-  for(int row_counter = 0 ; row_counter < rows ; row_counter++){
-    // this loop goes through all the rows
-    if(ammount_of_colours_in_coulors_counter > ammount_of_colours_in_coulors -1){
-      ammount_of_colours_in_coulors_counter = 0;
-    }
-    for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){
-      // for every row, this loops through all the collums
-      // r g b bright langs
-      new_collour_setting[row_counter][collor_setting_counter] = colours[ammount_of_colours_in_coulors_counter][collor_setting_counter];
-    }
-    ammount_of_colours_in_coulors_counter++;
-  }
-
-
   strip.begin();
   // strip.show();
-  Serial.begin(9600);
 }
 
 void loop (){
-
   if(Serial.available() > 0 ){// when there is a byte/chareracter avaiable in the buffer Serial.available becomes bigger
     // Serial.available = ammount of bytes in serial buffer
     state_char = Serial.read();
@@ -116,10 +96,10 @@ void loop (){
       break;
     }
   }
-
   if(updating_leds_per_segment_after_comparing){
     change_collor_per_segment_to_new_collour();
-  }else if(updating__all_leds_after_comparing){
+  }
+  else if(updating__all_leds_after_comparing){
     change_all_to_color();
   }
 }
@@ -127,6 +107,8 @@ void loop (){
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
 }
+
+
 
 
 

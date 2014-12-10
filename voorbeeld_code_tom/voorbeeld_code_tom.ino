@@ -7,31 +7,47 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800
 const byte rows = 16;
 const byte collums = 4;
 const byte colours_places = 4;
+const byte place_red = 0;
+const byte place_green = 1;
+const byte place_blue = 2;
+const byte place_brightnes = 3;
+
 int current_led_numbers [rows][collums];
 
 int new_collour_setting [rows][colours_places];
 int current_collour_setting [rows][colours_places];
 
 
-int row_counter_function_one = 0;
-boolean function_1_running = false; 
+int row_counter_comp = 0;
+boolean updating_leds_per_segment_after_comparing = false; 
+updating__all_leds_after_comparing = false;
 int brightness_counter = 0;
 
-const byte ammount_of_colours_in_coulors = 3;
+const byte ammount_of_colours_in_coulors = 4;
 int ammount_of_colours_in_coulors_counter = 0;
 
 unsigned long timestamp_function_one = 0;
 
 int colours[ammount_of_colours_in_coulors][colours_places] = {
   {
-    255,0,0,100                                                            }
+    255,0,0,100                                                                        }
   ,{
-    255,255,255,100                                                            }
+    255,255,255,100                                                                        }
   ,{
-    0,0,255,100                                                            }
+    0,0,255,100                                                                        }
+  ,{
+    0,255,0,100                                                                        }
 };
 
-char state_char = 'B';
+boolean colors_to_use [ammount_of_colours_in_coulors];
+const byte bright_red = 0;
+const byte green_brightnes_100 = 3;
+
+
+
+
+
+char state_char = 'S';
 
 void setup(){
   /*
@@ -52,7 +68,6 @@ void setup(){
   }
 
   // get a collour from the coulors array and fill the current collour setting with these colours
-
   for(int row_counter = 0 ; row_counter < rows ; row_counter++){
     // this loop goes through all the rows
     if(ammount_of_colours_in_coulors_counter > ammount_of_colours_in_coulors -1){
@@ -78,19 +93,19 @@ void loop (){
     // Serial.available = ammount of bytes in serial buffer
     state_char = Serial.read();
     // Serial.read() gets the byte into the charecter
-  }
-
-  if(state_char != 'B'){
     switch (state_char){
     case 'A':
       // when in other function first fadeout before fading in
       // fadeout function
       // fadein is standaart
-      function_1();
-      state_char = 'B';
+      // TODO: all colors to use to false
+      colors_to_use[bright_red] = true; 
+      colors_to_use[green_brightnes_100] = true; 
+      update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
+      updating_leds_per_segment_after_comparing = true;
+      // updating__all_leds_after_comparing = true; 
       break;
     case 'C':
-      function_1();
       break;
     case 'O':
       // alles blinken groen
@@ -100,75 +115,26 @@ void loop (){
       break;
     }
   }
-}
 
-void function_1(){
-
-  if(function_1_running == false){
-    function_1_running = true; 
-    row_counter_function_one = 0; 
+  if(updating_leds_per_segment_after_comparing){
+    change_collor_per_segment_to_new_collour();
   }
-  else if(row_counter_function_one < rows ){
-
-    int time_passed = micros() - timestamp_function_one;
-    if(time_passed > 5000){
-      timestamp_function_one = micros();
-
-      brightness_counter++;
-      // this loop goes through all the rows
-
-      int r_new = new_collour_setting[row_counter_function_one][0];
-      int g_new = new_collour_setting[row_counter_function_one][1];
-      int b_new = new_collour_setting[row_counter_function_one][2];
-      int brightness_new = new_collour_setting[row_counter_function_one][3];
-
-      int r_current = current_collour_setting[row_counter_function_one][0];
-      int g_current = current_collour_setting[row_counter_function_one][1];
-      int b_current = current_collour_setting[row_counter_function_one][2];
-      int brightness_current = current_collour_setting[row_counter_function_one][3];
-
-      if(r_new > r_current){
-        // r must becomes 
-
-      }
-      else if(r_new < r_current){
-        // r must become bigger
-
-      }
-      else if(r_new == r_current){
-        // old becomes current? dunno?      
-
-
-      }
-
-
-      // the brightness, r, g and b should change to the new setting
-      // so we must now what the color setting of the composition was, and what it should be
-      // for example if the current Red value in the all composition array is smaller than the new vallue, we must increase R untill it is the same as the new vallue
-      // same counts for G B and Brightness
-      // But when the old value of R is bigger than the new value we must decrease its value untill it is the same as the new vallue
-
-
-      for(int collum_counter = 0; collum_counter < collums ; collum_counter++){
-        // for every row, this loops through all the collums
-        setPixelColor(current_led_numbers[row_counter_function_one][collum_counter], r_current, g_current, b_current, brightness_current);
-      }      
-
-      strip.show();
-      if(brightness_counter > 100){
-        brightness_counter = 0;
-        row_counter_function_one++;
-      }
-    }
-    //    Serial.print("The time pased = ");
-    //    Serial.print(time_passed):
-    //    Serial.println(" milliseconds");
+   if(updating__all_leds_after_comparing){
+    change_collor_per_segment_to_new_collour();
   }
 }
 
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
 }
+
+
+
+
+
+
+
+
 
 
 

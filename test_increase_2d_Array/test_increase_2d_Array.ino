@@ -14,6 +14,13 @@ void loop(){
     Serial.println(i);
   }
   delay(2000);
+  for(int color_settings = 0; color_settings < 4; color_settings++){
+    // fill new array with only the colors we want to use
+    Serial.print(" current colour = ");
+    Serial.print(color_settings);
+  }
+  delay(2000);
 
 }
+
 

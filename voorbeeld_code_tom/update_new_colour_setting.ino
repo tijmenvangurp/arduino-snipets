@@ -41,6 +41,7 @@ void update_new_colour_setting( int brightness_setting){
         ammount_of_colors++;
       }
     }
+  
 
   }
   Serial.print("ammount_of_colors  = ");

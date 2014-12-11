@@ -25,17 +25,17 @@ void change_all_to_color(){
 
         if(g_current != g_new && row_counter == 0){
           //Serial.println(row_counter);
-//          Serial.println("g_c was not g_n");
-//          Serial.print("g_n ");
-//          Serial.print(g_new);
-//          Serial.print(" g_c ");
-//          Serial.println(g_current);
+          //          Serial.println("g_c was not g_n");
+          //          Serial.print("g_n ");
+          //          Serial.print(g_new);
+          //          Serial.print(" g_c ");
+          //          Serial.println(g_current);
         }
         else{
           //           Serial.println(row_counter);
           //          Serial.println("r_c was r_n");
         }
-        
+
         row_counter_comp = row_counter;
 
         compare_old_and_new_coulour_setting(r_current, r_new, place_red);
@@ -58,7 +58,7 @@ void change_all_to_color(){
           finished_updating_this_segment[row_counter] = true;
           Serial.print("Finished with row ");
           Serial.println(row_counter);
-          
+
           // boolean to check if done
         }
       }
@@ -75,6 +75,7 @@ void change_all_to_color(){
     strip.show();
   }
 }
+
 
 
 

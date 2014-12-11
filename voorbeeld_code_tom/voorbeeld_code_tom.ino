@@ -12,8 +12,8 @@ const byte place_green = 1;
 const byte place_blue = 2;
 const byte place_brightnes = 3;
 
- byte current_led_numbers [rows][collums];
- byte new_collour_setting [rows][colours_places];
+byte current_led_numbers [rows][collums];
+byte new_collour_setting [rows][colours_places];
 byte current_collour_setting [rows][colours_places];
 
 
@@ -30,17 +30,22 @@ unsigned long time_stamp = 0;
 
 byte colours[ammount_of_colours_in_coulors][colours_places] = {
   {
-    255,0,0,100                                                                                  }
+    255,0,0,100                                                                                    }
   ,{
-    255,255,255,100                                                                                  }
+    255,255,255,100                                                                                    }
   ,{
-    0,0,255,100                                                                                  }
+    0,0,255,100                                                                                    }
   ,{
-    0,255,0,100                                                                                  }
+    0,255,0,100                                                                                    }
 };
 
 boolean colors_to_use [ammount_of_colours_in_coulors];
+
+boolean finished_updating_this_segment [rows];
+
 const byte bright_red = 0;
+const byte bright_white = 1;
+const byte blue = 2;
 const byte green_brightnes = 3;
 
 char state_char = 'S';
@@ -48,9 +53,13 @@ char state_char = 'S';
 void setup(){
   Serial.begin(9600);
   for(int i = 0; i < ammount_of_colours_in_coulors ; i++){
-  colors_to_use[i] = false;
+    colors_to_use[i] = false;
   }
-  
+  for(int i = 0; i < rows ; i++){
+    finished_updating_this_segment[i] = false;
+  }
+
+
   /*
   http://stackoverflow.com/questions/2516096/fastest-way-to-zero-out-a-2d-array-in-c
    memset(array, 0, sizeof(array[0][0]) * m * n);
@@ -87,18 +96,21 @@ void loop (){
       // fadein is standaart      
       colors_to_use[bright_red] = true; 
       colors_to_use[green_brightnes] = true; 
-      colors_to_use[3] = true; 
+      colors_to_use[blue] = true; 
       update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
       updating_leds_per_segment_after_comparing = true;
       // updating__all_leds_after_comparing = true; 
       break;
     case 'C':
-      colors_to_use[bright_red] = true; 
-      colors_to_use[1] = true; 
-      update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
+      //colors_to_use[bright_red] = true; 
+      colors_to_use[green_brightnes] = true; 
+      update_new_colour_setting(255);// fill in brightness setting, if 0 than use brightness of defined colors
+      // updating_leds_per_segment_after_comparing = false;
       updating__all_leds_after_comparing = true;
       break;
     case 'O':
+      update_new_colour_setting(255);
+      updating_leds_per_segment_after_comparing = true;
       // alles blinken groen
       break;
     default:
@@ -117,6 +129,7 @@ void loop (){
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
 }
+
 
 
 

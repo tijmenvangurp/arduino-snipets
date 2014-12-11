@@ -27,7 +27,6 @@ int ammount_of_colours_in_coulors_counter = 0;
 
 unsigned long time_stamp = 0;
 
-
 byte colours[ammount_of_colours_in_coulors][colours_places] = {
   {
     255,0,0,100                                                                                    }
@@ -58,8 +57,6 @@ void setup(){
   for(int i = 0; i < rows ; i++){
     finished_updating_this_segment[i] = false;
   }
-
-
   /*
   http://stackoverflow.com/questions/2516096/fastest-way-to-zero-out-a-2d-array-in-c
    memset(array, 0, sizeof(array[0][0]) * m * n);
@@ -67,8 +64,6 @@ void setup(){
    */
   memset(current_collour_setting, 0, sizeof(current_collour_setting[0][0]) * rows * colours_places );
   memset(new_collour_setting, 0, sizeof(new_collour_setting[0][0]) * rows * collums);
-
-
 
   // array to fill current led numbers with appropriate led number per row
   for(int row_counter = 0 ; row_counter < rows ; row_counter++){
@@ -118,6 +113,7 @@ void loop (){
       break;
     }
   }
+  
   if(updating_leds_per_segment_after_comparing){
     change_collor_per_segment_to_new_collour();
   }

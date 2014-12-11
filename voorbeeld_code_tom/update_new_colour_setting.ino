@@ -41,8 +41,6 @@ void update_new_colour_setting( int brightness_setting){
         ammount_of_colors++;
       }
     }
-  
-
   }
   Serial.print("ammount_of_colors  = ");
   Serial.println(ammount_of_colors);
@@ -89,7 +87,7 @@ void update_new_colour_setting( int brightness_setting){
       }
       Serial.println(" "); 
     }
-     Serial.println("Finished setting collor settings");
+    Serial.println("Finished setting collor settings");
   }
   else{
     // no colors
@@ -102,6 +100,7 @@ void update_new_colour_setting( int brightness_setting){
   }
 
 }
+
 
 
 

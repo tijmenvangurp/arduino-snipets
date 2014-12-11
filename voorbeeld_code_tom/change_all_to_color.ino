@@ -1,7 +1,9 @@
 void change_all_to_color(){
 
-  int time_passed = micros() - time_stamp;
+  unsigned long time_passed = micros() - time_stamp;
+
   if(time_passed > 50000){
+    //Serial.println(time_passed);
     time_stamp = micros();
 
     // this loop goes through all the rows
@@ -21,17 +23,22 @@ void change_all_to_color(){
         int b_current = current_collour_setting[row_counter][place_blue];
         int brightness_current = current_collour_setting[row_counter][place_brightnes];
 
-        if(r_current =! r_new){
-          Serial.println(row_counter);
-          Serial.println("r_c was not r_n");
+        if(g_current != g_new && row_counter == 0){
+          //Serial.println(row_counter);
+          Serial.println("g_c was not g_n");
+          Serial.print("g_n ");
+          Serial.print(g_new);
+          Serial.print(" g_c ");
+          Serial.println(g_current);
         }
         else{
-          Serial.println("r_c was r_n");
+          //           Serial.println(row_counter);
+          //          Serial.println("r_c was r_n");
         }
 
-        compare_old_and_new_coulour_setting(r_current,r_new, place_red);
-        compare_old_and_new_coulour_setting(g_current,g_new, place_green);
-        compare_old_and_new_coulour_setting(b_current,b_new, place_blue);
+        compare_old_and_new_coulour_setting(r_current, r_new, place_red);
+        compare_old_and_new_coulour_setting(g_current, g_new, place_green);
+        compare_old_and_new_coulour_setting(b_current, b_new, place_blue);
         compare_old_and_new_coulour_setting(brightness_current, brightness_new, place_brightnes);
 
         // the brightness, r, g and b should change to the new setting
@@ -47,8 +54,8 @@ void change_all_to_color(){
         if(r_new == r_current && g_new == g_current && b_new == b_current && brightness_current == brightness_new){
           // done with changing colours update the next compartment
           finished_updating_this_segment[row_counter] == true;
-          // Serial.print("Finished with row ");
-          //  Serial.println(row_counter);
+          Serial.print("Finished with row ");
+          Serial.println(row_counter);
           // boolean to check if done
         }
       }
@@ -65,6 +72,7 @@ void change_all_to_color(){
     strip.show();
   }
 }
+
 
 
 

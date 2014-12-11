@@ -31,13 +31,13 @@ unsigned long time_stamp = 0;
 
 byte colours[ammount_of_colours_in_coulors][colours_places] = {
   {
-    255,0,0,100                                                                                      }
+    255,0,0,100                                                                                              }
   ,{
-    255,255,255,100                                                                                      }
+    255,255,255,100                                                                                              }
   ,{
-    0,0,255,100                                                                                      }
+    0,0,255,100                                                                                              }
   ,{
-    0,255,0,100                                                                                      }
+    0,255,0,100                                                                                              }
 };
 
 boolean colors_to_use [ammount_of_colours_in_coulors];
@@ -48,6 +48,9 @@ const byte bright_red = 0;
 const byte bright_white = 1;
 const byte blue = 2;
 const byte green_brightnes = 3;
+
+boolean disco = false;
+unsigned long timestamp_disco = 0;
 
 char state_char = 'S';
 
@@ -85,6 +88,10 @@ void loop (){
     // Serial.available = ammount of bytes in serial buffer
     state_char = Serial.read();
     // Serial.read() gets the byte into the charecter
+    if(state_char != 'D'){
+      disco = false;
+    }
+
     switch (state_char){
     case 'A':
       Serial.println("A key was pressed: ");
@@ -121,9 +128,35 @@ void loop (){
       // updating_leds_per_segment_after_comparing = true;
       updating__all_leds_after_comparing = true; 
       break;
+    case 'D':
+      Serial.println("disco");
+
+      disco = true;      
+
+
+
+      break;
     default:
       Serial.println("I dont knowt this letter");
       break;
+    }
+  }
+
+  if(disco){
+    long time_disco_passed = millis() - timestamp_disco;
+    if(time_disco_passed > 2000){
+      timestamp_disco = millis();
+      // when there are more then 2 seconds passed
+      for(int row_counter = 0 ; row_counter < rows ; row_counter++){
+        // choose ranrom color per block
+        byte random_colour_setting[4] = {
+          random(0,255),random(0,255),random(0,255),random(0,255)                 };
+
+        for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){
+          new_collour_setting[row_counter][collor_setting_counter] = random_colour_setting[collor_setting_counter]
+        }
+      }
+      updating__all_leds_after_comparing = true;
     }
   }
 
@@ -138,6 +171,10 @@ void loop (){
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
 }
+
+
+
+
 
 
 

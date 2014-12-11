@@ -15,7 +15,7 @@ void update_new_colour_setting( int brightness_setting){
       if(colors_to_use[current_color_row] == true){
         Serial.print("Current row = ");
         Serial.print(current_color_row);
-        for(int color_settings = 0; color_settings < 4; color_settings++){
+        for(int color_settings = 0; color_settings < colours_places; color_settings++){
           // fill new array with only the colors we want to use
           Serial.print(" current colour = ");
           Serial.print(color_settings);
@@ -32,7 +32,7 @@ void update_new_colour_setting( int brightness_setting){
     // we have a brightness setting to overull the current setting
     for(int current_color_row = 0; current_color_row < ammount_of_colours_in_coulors ; current_color_row++){
       if(colors_to_use[current_color_row] == true){
-        for(int color_settings = 0; color_settings < 3; color_settings++){
+        for(int color_settings = 0; color_settings < colours_places -1; color_settings++){
           // fill new array with only the colors we want to use
           current_colors[ammount_of_colors][color_settings] = colours[current_color_row][color_settings];
         }
@@ -97,6 +97,7 @@ void update_new_colour_setting( int brightness_setting){
   for(int i = 0; i < ammount_of_colours_in_coulors ; i++){
     colors_to_use[i] = false;
   }
+  row_counter_comp = 0;
 
 }
 

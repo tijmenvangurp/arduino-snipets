@@ -16,6 +16,8 @@ byte current_led_numbers [rows][collums];
 byte new_collour_setting [rows][colours_places];
 byte current_collour_setting [rows][colours_places];
 
+byte snelheid = 0;
+
 
 int row_counter_comp = 0;
 boolean updating_leds_per_segment_after_comparing = false; 
@@ -88,10 +90,12 @@ void loop (){
       Serial.println("A key was pressed: ");
       // when in other function first fadeout before fading in
       // fadeout function
-      // fadein is standaart      
+      // fadein is standaart 
+      snelheid = 5;     
       colors_to_use[bright_red] = true; 
       colors_to_use[green_brightnes] = true; 
       colors_to_use[blue] = true; 
+       
       update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
       updating_leds_per_segment_after_comparing = true;
       // updating__all_leds_after_comparing = true; 
@@ -108,6 +112,15 @@ void loop (){
       updating_leds_per_segment_after_comparing = true;
       // alles blinken groen
       break;
+    case 'R':
+      colors_to_use[green_brightnes] = true; 
+      colors_to_use[bright_white] = true; 
+      colors_to_use[blue] = true; 
+       
+      update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
+   // updating_leds_per_segment_after_comparing = true;
+      updating__all_leds_after_comparing = true; 
+ 
     default:
       Serial.println("I dont knowt this letter");
       break;

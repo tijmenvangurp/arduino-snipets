@@ -10,7 +10,7 @@ void update_new_colour_setting( int brightness_setting){
 
   if(brightness_setting == 0){
     Serial.println("use brightness setting of defined collors");
-    // we don't have a brightness setting to overull the current setting
+    // predefined brighness setting
     for(int current_color_row = 0; current_color_row < ammount_of_colours_in_coulors ; current_color_row++){
       if(colors_to_use[current_color_row] == true){
         Serial.print("Current row = ");
@@ -21,7 +21,6 @@ void update_new_colour_setting( int brightness_setting){
           Serial.print(color_settings);
           Serial.print(" value = ");
           Serial.println(colours[current_color_row][color_settings]);
-
           current_colors[ammount_of_colors][color_settings] = colours[current_color_row][color_settings];
         }
         ammount_of_colors++;

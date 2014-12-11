@@ -23,18 +23,18 @@ void change_all_to_color(){
         int b_current = current_collour_setting[row_counter][place_blue];
         int brightness_current = current_collour_setting[row_counter][place_brightnes];
 
-//        if(g_current != g_new && row_counter == 0){
-//          //Serial.println(row_counter);
+        if(g_current != g_new && row_counter == 0){
+          //Serial.println(row_counter);
 //          Serial.println("g_c was not g_n");
 //          Serial.print("g_n ");
 //          Serial.print(g_new);
 //          Serial.print(" g_c ");
 //          Serial.println(g_current);
-//        }
-//        else{
-//          //           Serial.println(row_counter);
-//          //          Serial.println("r_c was r_n");
-//        }
+        }
+        else{
+          //           Serial.println(row_counter);
+          //          Serial.println("r_c was r_n");
+        }
         
         row_counter_comp = row_counter;
 

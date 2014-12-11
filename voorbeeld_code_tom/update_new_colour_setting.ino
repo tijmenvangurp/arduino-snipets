@@ -60,8 +60,8 @@ void update_new_colour_setting( int brightness_setting){
         Serial.print(" , ");  
         // for every row, this loops through all the collums
         // r g b bright langs
-        //        Serial.print("rgb brightnes value = ");
-        //        Serial.println(current_colors[place_counter_current_colors][collor_setting_counter]);
+                Serial.print("rgb brightnes value = ");
+                Serial.println(current_colors[place_counter_current_colors][collor_setting_counter]);
         new_collour_setting[row_counter][collor_setting_counter] = current_colors[place_counter_current_colors][collor_setting_counter];
 
       }

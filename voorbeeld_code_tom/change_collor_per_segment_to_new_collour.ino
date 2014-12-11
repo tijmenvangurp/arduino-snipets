@@ -35,16 +35,16 @@ void change_collor_per_segment_to_new_collour(){
       strip.show();
       if(r_new == r_current && g_new == g_current && b_new == b_current && brightness_current == brightness_new){
         // done with changing colours update the next compartment
-//        Serial.print("current row = ");
-//        Serial.print(row_counter_comp);
-//        Serial.print(" r= ");
-//        Serial.print(r_current);
-//        Serial.print(" g= ");
-//        Serial.print(g_current);
-//        Serial.print(" b= ");
-//        Serial.print(b_current);
-//        Serial.print(" br= ");
-//        Serial.println(brightness_current);
+        Serial.print("current row = ");
+        Serial.print(row_counter_comp);
+        Serial.print(" r= ");
+        Serial.print(r_current);
+        Serial.print(" g= ");
+        Serial.print(g_current);
+        Serial.print(" b= ");
+        Serial.print(b_current);
+        Serial.print(" br= ");
+        Serial.println(brightness_current);
         row_counter_comp++;
       }
     }

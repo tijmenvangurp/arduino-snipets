@@ -14,12 +14,12 @@ void update_new_colour_setting( int brightness_setting){
     for(int current_color_row = 0; current_color_row < ammount_of_colours_in_coulors ; current_color_row++){
       if(colors_to_use[current_color_row] == true){
         Serial.print("Current row = ");
-        Serial.print(current_color_row);
+        Serial.println(current_color_row);
         for(int color_settings = 0; color_settings < colours_places; color_settings++){
           // fill new array with only the colors we want to use
-          Serial.print(" current colour = ");
+          Serial.print("    current colour = ");
           Serial.print(color_settings);
-          Serial.print(" value = ");
+          Serial.print("    value = ");
           Serial.println(colours[current_color_row][color_settings]);
           current_colors[ammount_of_colors][color_settings] = colours[current_color_row][color_settings];
         }
@@ -49,19 +49,17 @@ void update_new_colour_setting( int brightness_setting){
     Serial.println("more than one color");
     for(int row_counter = 0 ; row_counter < rows ; row_counter++){
       // this loop goes through all the rows
-
       if(place_counter_current_colors > ammount_of_colors -1 ){// als er 2 kleuren zijn mag de counter niet hoger worden dan 1 dus niet groter dan ammount of colors -1 
         place_counter_current_colors = 0; 
       }
-
-      Serial.print("new colour is ");  
+      Serial.print("new colour_setting = ");
+      Serial.println(row_counter);
       for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){
-        Serial.print(current_colors[place_counter_current_colors][collor_setting_counter]);
-        Serial.print(" , ");  
+        
         // for every row, this loops through all the collums
         // r g b bright langs
-                Serial.print("rgb brightnes value = ");
-                Serial.println(current_colors[place_counter_current_colors][collor_setting_counter]);
+        Serial.print("     rgb brightnes value = ");
+        Serial.println(current_colors[place_counter_current_colors][collor_setting_counter]);
         new_collour_setting[row_counter][collor_setting_counter] = current_colors[place_counter_current_colors][collor_setting_counter];
 
       }
@@ -100,6 +98,7 @@ void update_new_colour_setting( int brightness_setting){
   row_counter_comp = 0;
 
 }
+
 
 
 

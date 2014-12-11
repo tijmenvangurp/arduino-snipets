@@ -31,13 +31,13 @@ unsigned long time_stamp = 0;
 
 byte colours[ammount_of_colours_in_coulors][colours_places] = {
   {
-    255,0,0,100                                                                                    }
+    255,0,0,100                                                                                      }
   ,{
-    255,255,255,100                                                                                    }
+    255,255,255,100                                                                                      }
   ,{
-    0,0,255,100                                                                                    }
+    0,0,255,100                                                                                      }
   ,{
-    0,255,0,100                                                                                    }
+    0,255,0,100                                                                                      }
 };
 
 boolean colors_to_use [ammount_of_colours_in_coulors];
@@ -91,11 +91,11 @@ void loop (){
       // when in other function first fadeout before fading in
       // fadeout function
       // fadein is standaart 
-      snelheid = 5;     
+      snelheid = 10;     
       colors_to_use[bright_red] = true; 
       colors_to_use[green_brightnes] = true; 
       colors_to_use[blue] = true; 
-       
+
       update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
       updating_leds_per_segment_after_comparing = true;
       // updating__all_leds_after_comparing = true; 
@@ -116,17 +116,17 @@ void loop (){
       colors_to_use[green_brightnes] = true; 
       colors_to_use[bright_white] = true; 
       colors_to_use[blue] = true; 
-       
+
       update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
-   // updating_leds_per_segment_after_comparing = true;
+      // updating_leds_per_segment_after_comparing = true;
       updating__all_leds_after_comparing = true; 
- 
+      break;
     default:
       Serial.println("I dont knowt this letter");
       break;
     }
   }
-  
+
   if(updating_leds_per_segment_after_comparing){
     change_collor_per_segment_to_new_collour();
   }
@@ -138,6 +138,7 @@ void loop (){
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
 }
+
 
 
 

@@ -51,7 +51,10 @@ const byte green_brightnes = 3;
 
 boolean disco = false;
 unsigned long timestamp_disco = 0;
-
+  
+  
+  
+  
 char state_char = 'S';
 
 void setup(){

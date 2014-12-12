@@ -1,6 +1,8 @@
 void change_collor_per_segment_to_new_collour(){
 
   if(row_counter_comp < rows ){
+    
+    
 
     unsigned long  time_passed = micros() - time_stamp;
     if(time_passed > 100){

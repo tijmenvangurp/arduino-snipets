@@ -1,13 +1,12 @@
 void change_collor_per_segment_to_new_collour(){
 
-  if(row_counter_comp < rows ){
-    
-    
+  if(row_counter_comp < rows ){    
 
     unsigned long  time_passed = micros() - time_stamp;
-    if(time_passed > 100){
+    if(time_passed > slow_down){
       //Serial.println(time_passed);
       time_stamp = micros();
+     
       // this loop goes through all the rows
       int r_new = new_collour_setting[row_counter_comp][place_red];
       int g_new = new_collour_setting[row_counter_comp][place_green];
@@ -29,6 +28,8 @@ void change_collor_per_segment_to_new_collour(){
       // for example if the current Red value in the all composition array is smaller than the new vallue, we must increase R untill it is the same as the new vallue
       // same counts for G B and Brightness
       // But when the old value of R is bigger than the new value we must decrease its value untill it is the same as the new vallue
+
+
 
       for(int collum_counter = 0; collum_counter < collums ; collum_counter++){
         // for every row, this loops through all the collums
@@ -62,6 +63,8 @@ void change_collor_per_segment_to_new_collour(){
     updating_leds_per_segment_after_comparing = false;
   }
 }
+
+
 
 
 

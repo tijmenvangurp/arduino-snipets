@@ -1,14 +1,25 @@
-void change_all_to_color(){
+void change_all_to_color(byte amount_of_comps_to_update){
 
   unsigned long time_passed = micros() - time_stamp;
 
-  if(time_passed > 100){
+  if(time_passed > slow_down){
     //Serial.println(time_passed);
     time_stamp = micros();
+    boolean done_updating_leds = false;
+
+    if(row_counter_comp + amount_of_comps_to_update >= rows){
+      // when the current row plus the ammount of rows to update is bigger than the ammount of rows
+      // only update the remaining leds
+      amount_of_comps_to_update = rows - row_counter_comp;
+      // wer are updating the last segment so when ammount of colours to update is 0 we are done
+      done_updating_leds = true;
+    }
 
     // this loop goes through all the rows
     int counter_amount_of_colours_to_update = 0;
-    for(int row_counter = 0 ; row_counter < rows ; row_counter++){
+
+    
+      for(int row_counter = row_counter_comp ; row_counter < (row_counter_comp + amount_of_comps_to_update) ; row_counter++){
       if( finished_updating_this_segment[row_counter] == false){
 
         counter_amount_of_colours_to_update ++;
@@ -65,18 +76,34 @@ void change_all_to_color(){
     }
 
     if(counter_amount_of_colours_to_update == 0){
-      Serial.println("done updating all colours at once");
-      slow_down = 100;
-      snelheid =1;
-      updating__all_leds_after_comparing = false;
-      for(int i = 0; i < rows ; i++){
-        finished_updating_this_segment[i] = false;
+      // we are done updating this segment
+      row_counter_comp += amount_of_comps_to_update;
+
+      if(done_updating_leds){
+        amount_of_segments_to_update = 1;
+        row_counter_comp = 0;
+        Serial.println("done updating all leds");
+        slow_down = 100;
+        snelheid = 1;
+        updating__all_leds_after_comparing = false;
+        for(int i = 0; i < rows ; i++){
+          finished_updating_this_segment[i] = false;
+        }
       }
+
+
     }
     // end for loop
     strip.show();
   }
 }
+
+
+
+
+
+
+
 
 
 

@@ -17,7 +17,7 @@ byte new_collour_setting [rows][colours_places];
 byte current_collour_setting [rows][colours_places];
 
 byte snelheid = 1;
-byte slow_down = 100;
+long slow_down = 100;
 
 int row_counter_comp = 0;
 boolean updating_leds_per_segment_after_comparing = false; 
@@ -31,13 +31,13 @@ unsigned long time_stamp = 0;
 
 byte colours[ammount_of_colours_in_coulors][colours_places] = {
   {
-    255,0,0,100                                                                                                    }
+    255,0,0,100                                                                                                      }
   ,{
-    255,255,255,100                                                                                                    }
+    255,255,255,100                                                                                                      }
   ,{
-    0,0,255,100                                                                                                    }
+    0,0,255,100                                                                                                      }
   ,{
-    0,255,0,100                                                                                                    }
+    0,255,0,100                                                                                                      }
 };
 
 byte snake_forwards [16] ={
@@ -45,11 +45,11 @@ byte snake_forwards [16] ={
 
 byte snake_normal [16] ={
   0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-  
+
 byte snake_backwards [16] ={
   12,11,4,3,13,10,5,2,14,9,6,1,15,8,7,0};
 
-
+byte amount_of_segments_to_update = 1;
 boolean colors_to_use [ammount_of_colours_in_coulors];
 
 boolean finished_updating_this_segment [rows];
@@ -111,7 +111,8 @@ void loop (){
       // when in other function first fadeout before fading in
       // fadeout function
       // fadein is standaart 
-      snelheid = 10;     
+      snelheid = 10; 
+      amount_of_segments_to_update = 4;    
       colors_to_use[bright_red] = true; 
       colors_to_use[green_brightnes] = true; 
       colors_to_use[blue] = true; 
@@ -119,9 +120,9 @@ void loop (){
 
       update_per_order(snake_backwards);
       update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
-      
-      updating_leds_per_segment_after_comparing = true;
-      // updating__all_leds_after_comparing = true; 
+
+     // updating_leds_per_segment_after_comparing = true;
+       updating__all_leds_after_comparing = true; 
       break;
     case 'C':
       //colors_to_use[bright_red] = true; 
@@ -132,7 +133,7 @@ void loop (){
       //  updating__all_leds_after_comparing = true;
       break;
     case 'O':
-    snelheid = 1;
+      snelheid = 1;
       update_new_colour_setting(255);
       updating__all_leds_after_comparing = true;
       // alles blinken groen
@@ -168,7 +169,7 @@ void loop (){
       for(int row_counter = 0 ; row_counter < rows ; row_counter++){
         // choose ranrom color per block
         byte random_colour_setting[4] = {
-          random(0,255),random(0,255),random(0,255),random(0,255)                                         };
+          random(0,255),random(0,255),random(0,255),random(0,255)                                                 };
         byte random_colour_from_colour_array = random(0,ammount_of_colours_in_coulors);
 
         for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){
@@ -184,13 +185,14 @@ void loop (){
     change_collor_per_segment_to_new_collour();
   }
   else if(updating__all_leds_after_comparing){
-    change_all_to_color();
+    change_all_to_color(amount_of_segments_to_update);
   }
 }
 
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
 }
+
 
 
 

@@ -151,9 +151,11 @@ void loop (){
         // choose ranrom color per block
         byte random_colour_setting[4] = {
           random(0,255),random(0,255),random(0,255),random(0,255)                 };
+          byte random_colour_from_colour_array = random(0,ammount_of_colours_in_coulors);
 
         for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){
-          new_collour_setting[row_counter][collor_setting_counter] = random_colour_setting[collor_setting_counter]
+         // new_collour_setting[row_counter][collor_setting_counter] = random_colour_setting[collor_setting_counter]
+         new_collour_setting[row_counter][collor_setting_counter] = colours[random_colour_from_colour_array][collor_setting_counter];
         }
       }
       updating__all_leds_after_comparing = true;

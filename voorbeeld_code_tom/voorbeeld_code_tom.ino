@@ -16,8 +16,8 @@ byte current_led_numbers [rows][collums];
 byte new_collour_setting [rows][colours_places];
 byte current_collour_setting [rows][colours_places];
 
-byte snelheid = 0;
-
+byte snelheid = 1;
+byte slow_down = 100;
 
 int row_counter_comp = 0;
 boolean updating_leds_per_segment_after_comparing = false; 
@@ -31,14 +31,24 @@ unsigned long time_stamp = 0;
 
 byte colours[ammount_of_colours_in_coulors][colours_places] = {
   {
-    255,0,0,100                                                                                                }
+    255,0,0,100                                                                                                    }
   ,{
-    255,255,255,100                                                                                                }
+    255,255,255,100                                                                                                    }
   ,{
-    0,0,255,100                                                                                                }
+    0,0,255,100                                                                                                    }
   ,{
-    0,255,0,100                                                                                                }
+    0,255,0,100                                                                                                    }
 };
+
+byte snake_forwards [16] ={
+  0,7,8,15,1,6,9,14,2,5,10,13,3,4,11,12};
+
+byte snake_normal [16] ={
+  0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+  
+byte snake_backwards [16] ={
+  12,11,4,3,13,10,5,2,14,9,6,1,15,8,7,0};
+
 
 boolean colors_to_use [ammount_of_colours_in_coulors];
 
@@ -105,9 +115,11 @@ void loop (){
       colors_to_use[bright_red] = true; 
       colors_to_use[green_brightnes] = true; 
       colors_to_use[blue] = true; 
-      update_per_4();
 
+
+      update_per_order(snake_backwards);
       update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
+      
       updating_leds_per_segment_after_comparing = true;
       // updating__all_leds_after_comparing = true; 
       break;
@@ -115,17 +127,18 @@ void loop (){
       //colors_to_use[bright_red] = true; 
       colors_to_use[green_brightnes] = true; 
       update_new_colour_setting(255);// fill in brightness setting, if 0 than use brightness of defined colors
-       updating_leds_per_segment_after_comparing = true;
-      update_snake();
-    //  updating__all_leds_after_comparing = true;
+      updating_leds_per_segment_after_comparing = true;
+      update_per_order(snake_forwards);
+      //  updating__all_leds_after_comparing = true;
       break;
     case 'O':
+    snelheid = 1;
       update_new_colour_setting(255);
-      updating_leds_per_segment_after_comparing = true;
+      updating__all_leds_after_comparing = true;
       // alles blinken groen
       break;
     case 'R':
-    
+
       colors_to_use[green_brightnes] = true; 
       colors_to_use[bright_white] = true; 
       colors_to_use[blue] = true; 
@@ -139,7 +152,7 @@ void loop (){
       disco = true;      
       break;
     case '1':
-    updating__all_leds_after_comparing = true; 
+      updating__all_leds_after_comparing = true; 
 
     default:
       Serial.println("I dont knowt this letter");
@@ -155,7 +168,7 @@ void loop (){
       for(int row_counter = 0 ; row_counter < rows ; row_counter++){
         // choose ranrom color per block
         byte random_colour_setting[4] = {
-          random(0,255),random(0,255),random(0,255),random(0,255)                         };
+          random(0,255),random(0,255),random(0,255),random(0,255)                                         };
         byte random_colour_from_colour_array = random(0,ammount_of_colours_in_coulors);
 
         for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){
@@ -178,6 +191,8 @@ void loop (){
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
 }
+
+
 
 
 

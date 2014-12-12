@@ -66,6 +66,8 @@ void change_all_to_color(){
 
     if(counter_amount_of_colours_to_update == 0){
       Serial.println("done updating all colours at once");
+      slow_down = 100;
+      snelheid =1;
       updating__all_leds_after_comparing = false;
       for(int i = 0; i < rows ; i++){
         finished_updating_this_segment[i] = false;

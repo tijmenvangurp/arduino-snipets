@@ -31,13 +31,13 @@ unsigned long time_stamp = 0;
 
 byte colours[ammount_of_colours_in_coulors][colours_places] = {
   {
-    255,0,0,100                                                                                              }
+    255,0,0,100                                                                                                }
   ,{
-    255,255,255,100                                                                                              }
+    255,255,255,100                                                                                                }
   ,{
-    0,0,255,100                                                                                              }
+    0,0,255,100                                                                                                }
   ,{
-    0,255,0,100                                                                                              }
+    0,255,0,100                                                                                                }
 };
 
 boolean colors_to_use [ammount_of_colours_in_coulors];
@@ -51,10 +51,10 @@ const byte green_brightnes = 3;
 
 boolean disco = false;
 unsigned long timestamp_disco = 0;
-  
-  
-  
-  
+
+
+
+
 char state_char = 'S';
 
 void setup(){
@@ -105,6 +105,7 @@ void loop (){
       colors_to_use[bright_red] = true; 
       colors_to_use[green_brightnes] = true; 
       colors_to_use[blue] = true; 
+      update_per_4();
 
       update_new_colour_setting(0);// fill in brightness setting, if 0 than use brightness of defined colors
       updating_leds_per_segment_after_comparing = true;
@@ -114,8 +115,9 @@ void loop (){
       //colors_to_use[bright_red] = true; 
       colors_to_use[green_brightnes] = true; 
       update_new_colour_setting(255);// fill in brightness setting, if 0 than use brightness of defined colors
-      // updating_leds_per_segment_after_comparing = false;
-      updating__all_leds_after_comparing = true;
+       updating_leds_per_segment_after_comparing = true;
+      update_snake();
+    //  updating__all_leds_after_comparing = true;
       break;
     case 'O':
       update_new_colour_setting(255);
@@ -123,6 +125,7 @@ void loop (){
       // alles blinken groen
       break;
     case 'R':
+    
       colors_to_use[green_brightnes] = true; 
       colors_to_use[bright_white] = true; 
       colors_to_use[blue] = true; 
@@ -133,12 +136,11 @@ void loop (){
       break;
     case 'D':
       Serial.println("disco");
-
       disco = true;      
-
-
-
       break;
+    case '1':
+    updating__all_leds_after_comparing = true; 
+
     default:
       Serial.println("I dont knowt this letter");
       break;
@@ -153,12 +155,12 @@ void loop (){
       for(int row_counter = 0 ; row_counter < rows ; row_counter++){
         // choose ranrom color per block
         byte random_colour_setting[4] = {
-          random(0,255),random(0,255),random(0,255),random(0,255)                 };
-          byte random_colour_from_colour_array = random(0,ammount_of_colours_in_coulors);
+          random(0,255),random(0,255),random(0,255),random(0,255)                         };
+        byte random_colour_from_colour_array = random(0,ammount_of_colours_in_coulors);
 
         for(int collor_setting_counter = 0; collor_setting_counter < colours_places ; collor_setting_counter++){
-         // new_collour_setting[row_counter][collor_setting_counter] = random_colour_setting[collor_setting_counter]
-         new_collour_setting[row_counter][collor_setting_counter] = colours[random_colour_from_colour_array][collor_setting_counter];
+          // new_collour_setting[row_counter][collor_setting_counter] = random_colour_setting[collor_setting_counter]
+          new_collour_setting[row_counter][collor_setting_counter] = colours[random_colour_from_colour_array][collor_setting_counter];
         }
       }
       updating__all_leds_after_comparing = true;
@@ -176,6 +178,7 @@ void loop (){
 void setPixelColor( uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint16_t brightness) {
   strip.setPixelColor(n, (brightness*r/255) , (brightness*g/255), (brightness*b/255));
 }
+
 
 
 

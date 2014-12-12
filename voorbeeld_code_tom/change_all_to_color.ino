@@ -19,7 +19,7 @@ void change_all_to_color(byte amount_of_comps_to_update){
     int counter_amount_of_colours_to_update = 0;
 
     
-      for(int row_counter = row_counter_comp ; row_counter < (row_counter_comp + amount_of_comps_to_update) ; row_counter++){
+      for(byte row_counter = row_counter_comp ; row_counter < (row_counter_comp + amount_of_comps_to_update) ; row_counter++){
       if( finished_updating_this_segment[row_counter] == false){
 
         counter_amount_of_colours_to_update ++;
@@ -47,12 +47,12 @@ void change_all_to_color(byte amount_of_comps_to_update){
           //          Serial.println("r_c was r_n");
         }
 
-        row_counter_comp = row_counter;
+     //   row_counter_comp = row_counter;
 
-        compare_old_and_new_coulour_setting(r_current, r_new, place_red);
-        compare_old_and_new_coulour_setting(g_current, g_new, place_green);
-        compare_old_and_new_coulour_setting(b_current, b_new, place_blue);
-        compare_old_and_new_coulour_setting(brightness_current, brightness_new, place_brightnes);
+        compare_old_and_new_coulour_setting(r_current, r_new, place_red ,row_counter );
+        compare_old_and_new_coulour_setting(g_current, g_new, place_green ,row_counter);
+        compare_old_and_new_coulour_setting(b_current, b_new, place_blue, row_counter);
+        compare_old_and_new_coulour_setting(brightness_current, brightness_new, place_brightnes,row_counter);
 
         // the brightness, r, g and b should change to the new setting
         // so we must now what the color setting of the composition was, and what it should be

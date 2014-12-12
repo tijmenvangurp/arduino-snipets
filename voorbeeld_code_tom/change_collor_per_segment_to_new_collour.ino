@@ -18,10 +18,10 @@ void change_collor_per_segment_to_new_collour(){
       int b_current = current_collour_setting[row_counter_comp][place_blue];
       int brightness_current = current_collour_setting[row_counter_comp][place_brightnes];
 
-      compare_old_and_new_coulour_setting(r_current,r_new, place_red );
-      compare_old_and_new_coulour_setting(g_current,g_new, place_green);
-      compare_old_and_new_coulour_setting(b_current,b_new, place_blue);
-      compare_old_and_new_coulour_setting(brightness_current, brightness_new, place_brightnes);
+      compare_old_and_new_coulour_setting(r_current,r_new, place_red, row_counter_comp);
+      compare_old_and_new_coulour_setting(g_current,g_new, place_green, row_counter_comp);
+      compare_old_and_new_coulour_setting(b_current,b_new, place_blue, row_counter_comp);
+      compare_old_and_new_coulour_setting(brightness_current, brightness_new, place_brightnes, row_counter_comp);
 
       // the brightness, r, g and b should change to the new setting
       // so we must now what the color setting of the composition was, and what it should be
